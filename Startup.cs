@@ -3,6 +3,7 @@
 //
 // Generated with EchoBot .NET Template version v4.17.1
 
+using EchoBot.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
@@ -39,6 +40,8 @@ namespace EchoBot
 
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
             services.AddTransient<IBot, Bots.EchoBot>();
+            
+            services.AddSingleton<IIntentRecognizerService, IntentRecognizerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,8 +61,6 @@ namespace EchoBot
                 {
                     endpoints.MapControllers();
                 });
-
-            // app.UseHttpsRedirection();
         }
     }
 }
